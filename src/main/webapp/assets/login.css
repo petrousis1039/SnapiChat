@@ -1,0 +1,353 @@
+html {
+  box-sizing: border-box;
+  background: url(../images/log-bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin-top: 40px;
+}
+
+body, #contact {
+	background-color: transparent;
+}
+.tab-name {
+    background: #DDD;
+	padding-top: 25px;
+	padding-left: 30px;
+}
+
+.logmod {
+  display: block;
+  z-index: 1;
+}
+.logmod::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.logmod__wrapper {
+  display: block;
+  background: #FFF;
+  position: relative;
+  max-width: 550px;
+  border-radius: 4px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+}
+.logmod__container {
+  overflow: hidden;
+  width: 100%;
+}
+.logmod__container::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.logmod__tab {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+.logmod__tab-wrapper {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.logmod__tab.show {
+  opacity: 1;
+  height: 100%;
+  visibility: visible;
+}
+.logmod__tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.logmod__tabs::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.logmod__tabs li.current a {
+  background: #FFF;
+  color: #333;
+}
+.logmod__tabs li a {
+  width: 50%;
+  position: relative;
+  float: left;
+  text-align: center;
+  background: #D2D8D8;
+  line-height: 72px;
+  height: 72px;
+  text-decoration: none;
+  color: #809191;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+.logmod__tabs li a:focus {
+  outline: dotted 1px;
+}
+.logmod__heading {
+  text-align: center;
+  padding: 12px 0 12px 0;
+}
+.logmod__heading-subtitle {
+  display: block;
+  font-weight: 400;
+  font-size: 15px;
+  color: #888;
+  line-height: 48px;
+}
+.logmod__form {
+  border-top: 1px solid #e5e5e5;
+}
+.logmod__alter {
+  display: block;
+  position: relative;
+  margin-top: 7px;
+}
+.logmod__alter::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.logmod__alter .connect:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+.connect {
+  overflow: hidden;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 72px;
+  line-height: 72px;
+  text-decoration: none;
+}
+.connect::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.connect:focus, .connect:hover, .connect:visited {
+  color: #FFF;
+  text-decoration: none;
+}
+.connect__icon {
+  vertical-align: middle;
+  float: left;
+  width: 70px;
+  text-align: center;
+  font-size: 22px;
+}
+.connect__context {
+  vertical-align: middle;
+  text-align: center;
+}
+.connect.facebook {
+  background: #3b5998;
+  color: #FFF;
+}
+.connect.facebook a {
+  color: #FFF;
+}
+.connect.facebook .connect__icon {
+  background: #283d68;
+}
+.connect.googleplus {
+  background: #dd4b39;
+  color: #FFF;
+}
+.connect.googleplus a {
+  color: #FFF;
+}
+.connect.googleplus .connect__icon {
+  background: #b52f1f;
+}
+
+.simform {
+  position: relative;
+}
+.simform__actions {
+  padding: 15px;
+  font-size: 14px;
+}
+.simform__actions::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.simform__actions .sumbit {
+  height: 48px;
+  float: right;
+  color: #FFF;
+  width: 50%;
+  font-weight: 700;
+  font-size: 16px;
+  background: #00A9C6;
+  margin-top: 7px;
+}
+.simform__actions .sumbit::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.simform__actions-sidetext {
+  display: inline-block;
+  float: left;
+  width: 50%;
+  padding: 0 10px;
+  margin: 9px 0 0 0;
+  color: #8C979E;
+  text-align: center;
+  line-height: 24px;
+}
+.simform__actions-sidetext::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.sminputs {
+  border-bottom: 1px solid #E5E5E5;
+}
+.sminputs::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.sminputs .input {
+  display: block;
+  position: relative;
+  width: 50%;
+  height: 71px;
+  padding: 11px 24px;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: none;
+  float: left;
+  background-color: #FFF;
+  border-radius: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.sminputs .input.active {
+  background: #eee;
+}
+.sminputs .input.active .hide-password {
+  background: #eee;
+}
+.sminputs .input.full {
+  width: 100%;
+}
+.sminputs .input.tall {
+	height: auto;
+}
+.sminputs .input.tall .img-wrapper {
+	float: left;
+	width: 150px;
+	height: 150px;
+	text-align: center;
+}
+.sminputs .input.tall .img-wrapper .profile-img {
+	max-height:100%;
+	max-width:100%;
+}
+.sminputs .input.tall .profile-img-select {
+    float: left;
+	width: 65%;
+	margin-left: 20px;
+}
+.sminputs .input label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  line-height: 24px;
+}
+.sminputs .input input {
+  postion: relative;
+  display: inline-block;
+  height: 24px;
+  font-size: 15px;
+  line-height: 19.2px;
+  color: #555;
+  border-radius: 4px;
+  vertical-align: middle;
+  box-shadow: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  color: rgba(75, 89, 102, 0.85);
+}
+.sminputs .hide-password {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 15px;
+  border-left: 1px solid #e4e4e4;
+  font-size: 14px;
+  background: #FFF;
+  overflow: hidden;
+  color: #444;
+  cursor: pointer;
+  margin-top: 12px;
+  line-height: 48px;
+}
+
+.special {
+  color: #f44336;
+  position: relative;
+  text-decoration: none;
+  transition: all 0.15s ease-out;
+}
+.special:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0px;
+  left: 0;
+  background: #f00;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out 0s;
+}
+.special:hover {
+  transition: all 0.15s ease-out;
+}
+.special:hover:before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+#baseline {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  background-image: url(http://basehold.it/i/24);
+}
