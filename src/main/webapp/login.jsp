@@ -126,7 +126,7 @@
                                             </div>
                                         </div>
                                         <div class="simform__actions">
-                                            <input class="sumbit" name="submit" type="submit" value="Create Account" />
+                                            <input class="sumbit" name="commit" type="submit" value="Create Account" />
                                             <span class="simform__actions-sidetext">By creating an account you agree to our <a class="special" href="#" target="_blank" role="link">Terms & Privacy</a></span>
                                         </div> 
                                     </form>
@@ -152,7 +152,7 @@
                                             </div>
                                         </div>
                                         <div class="simform__actions">
-                                            <input class="sumbit" name="login" type="submit" value="Log In" />
+                                            <input class="sumbit" name="commit" type="submit" value="Log In" />
                                             <span class="simform__actions-sidetext">Forgot your password?<br><a class="special" role="link" href="#">Click Here</a></span>
                                         </div> 
                                     </form>
