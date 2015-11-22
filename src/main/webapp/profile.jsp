@@ -1,7 +1,7 @@
 <%-- 
     Document   : profile
     Created on : Nov 19, 2015, 4:42:11 PM
-    Author     : Petros
+    Author     : Alexis
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="profile-img-select">
                                             <label class="string optional" for="user-name">Username</label>
-                                            <input class="string optional" maxlength="255" id="user-name" name="uname" value="${sessionScope.userid}" type="text" size="50" readonly />
+                                            <input class="string optional" maxlength="255" id="user-name" name="uname" value="${sessionScope.userName}" type="text" size="50" readonly />
                                             <label class="string optional" for="user-name">Image</label>
                                             <input type='file' id="profile-img-btn" />
                                         </div>
@@ -145,7 +145,7 @@
                                 </div>
                                 <div class="simform__actions">
                                     <input class="sumbit" name="commit" type="submit" value="Save Changes" />
-                                    <span class="simform__actions-sidetext">To logout please<br><a class="special" role="link" href="logout">Click Here</a></span>
+                                    <span class="simform__actions-sidetext"><a class="special" role="link" href="delete_me.jsp">Delete Account</a><br><a class="special" role="link" href="logout">Logout</a></span>
                                 </div> 
                             </form>
                         </div>
