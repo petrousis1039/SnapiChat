@@ -186,3 +186,11 @@ p{font-size:1em;line-height: 1.7em; margin-bottom: 1.7em;}
     width: 75%;
     margin: 0;
 }
+
+.delete-info {
+    margin: 15px 0;
+}
+
+.delete-box #response{
+    margin: 15px 0;
+}
