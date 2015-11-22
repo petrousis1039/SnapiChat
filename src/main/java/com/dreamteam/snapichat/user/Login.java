@@ -73,7 +73,8 @@ public class Login extends HttpServlet {
             String pass = rs.getString("passwordhash");
             
             if(PasswordHash.validatePassword(pwd, pass)) {
-                session.setAttribute("userid", uname);
+                session.setAttribute("userID", rs.getInt("id"));
+                session.setAttribute("userName", uname);
                 return true;
             }
         }
