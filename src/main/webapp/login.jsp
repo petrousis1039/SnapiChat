@@ -83,8 +83,8 @@
                 <div class="logmod__wrapper">
                     <div class="logmod__container">
                         <ul class="logmod__tabs">
-                            <li data-tabtar="lgm-2"><a href="#">Login</a></li>
-                            <li data-tabtar="lgm-1"><a href="#">Sign Up</a></li>
+                            <li data-tabtar="lgm-2"><a id="login-link" href="#">Login</a></li>
+                            <li data-tabtar="lgm-1"><a id="signup-link" href="#">Sign Up</a></li>
                         </ul>
                         <div class="logmod__tab-wrapper">
                             <div class="logmod__tab lgm-1">
