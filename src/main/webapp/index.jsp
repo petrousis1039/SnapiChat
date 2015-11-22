@@ -67,7 +67,8 @@
                                 <li ><a href="friends.jsp">Friends</a></li>
                                 <li ><a href="story.jsp">Story</a></li>
                                 <li ><a href="#">Snapis</a></li>
-                                <li ><a href="help.jsp">Help</a></li>
+                                <li ><a href="shoutbox.jsp">ShoutBox</a></li>
+                                <li ><a href="about.jsp">About</a></li>
                                 <li ><a href="contact.jsp">Contact</a></li>
                             </ul>
                         </div>

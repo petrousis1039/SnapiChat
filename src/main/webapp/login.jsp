@@ -68,7 +68,8 @@
                                 <li ><a href="friends.jsp">Friends</a></li>
                                 <li ><a href="story.jsp">Story</a></li>
                                 <li ><a href="#">Snapis</a></li>
-                                <li ><a href="help.jsp">Help</a></li>
+                                <li ><a href="shoutbox.jsp">ShoutBox</a></li>
+                                <li ><a href="about.jsp">About</a></li>
                                 <li ><a href="contact.jsp">Contact</a></li>
                             </ul>
                         </div>
@@ -163,8 +164,19 @@
                 </div>
             </div>
 
-            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+            <!-- jquery -->
+            <script src="${pageContext.request.contextPath}/assets/jquery.js"></script>
 
-            <script src="assets/index.js"></script>
+            <!-- wow script -->
+            <script src="${pageContext.request.contextPath}/assets/wow/wow.min.js"></script>
+
+            <!-- boostrap -->
+            <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js" type="text/javascript" ></script>
+
+            <!-- jquery mobile -->
+            <script src="${pageContext.request.contextPath}/assets/mobile/touchSwipe.min.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/respond/respond.js"></script>
+
+            <script src="${pageContext.request.contextPath}/assets/index.js"></script>
     </body>
 </html>
