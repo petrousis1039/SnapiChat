@@ -83,10 +83,10 @@
                 <h2 class="text-center  wowload fadeInUp">Get in touch</h2>
                 <div class="row wowload fadeInLeftBig">      
                     <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
-                        <form action="contact" method="POST">
-                            <input type="text" placeholder="Name">
-                            <input type="text" placeholder="Email">
-                            <textarea rows="5" placeholder="Message"></textarea>
+                        <form action="sendMail" method="POST">
+                            <input type="text" name="name" placeholder="Name">
+                            <input type="text" name="email" placeholder="Email">
+                            <textarea rows="5" name="message" placeholder="Message"></textarea>
                             <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</button>
                         </form>
                     </div>
