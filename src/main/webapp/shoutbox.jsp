@@ -89,7 +89,7 @@
                 <div class="row wowload fadeInLeftBig">      
                     <div class="col-sm-6 col-sm-offset-3 col-xs-12">
                         <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-                                           url="jdbc:mysql://localhost/snapichat"
+                                           url="jdbc:mysql://127.7.232.130:3306/snapichat"
                                            user="adminZ4LAQSe" password="cJ7usqLZ3zvD"/>
                         <sql:query dataSource="${snapshot}" var="result">
                             SELECT * from shoutbox, user WHERE shoutbox.user_id = user.id;
