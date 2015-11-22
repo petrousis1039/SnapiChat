@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `shoutbox`;
+
+CREATE TABLE `shoutbox` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL,
+	`text` VARCHAR(255) NOT NULL,
+	`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	CONSTRAINT `fshoutuserid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+);

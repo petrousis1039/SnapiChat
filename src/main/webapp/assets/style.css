@@ -157,3 +157,32 @@ p{font-size:1em;line-height: 1.7em; margin-bottom: 1.7em;}
 	figure.effect-chico figcaption {padding: 1.5em;}
 	.footer{margin-top: 2em;padding-bottom: 2em;}
 }
+
+#shoutbox {
+    background: #FFF;
+    border: 1px solid #CCC;
+    margin-bottom: 15px;
+    min-height: 200px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+#shoutbox .message {
+    padding: 5px;
+}
+
+#shoutbox .message:nth-child(even) {
+    background: #CEEBF0;
+}
+
+#shoutbox .user {
+    display: inline-block;
+    width: 20%;
+    margin: 0 0 0 15px;
+}
+
+#shoutbox .text {
+    display: inline-block;
+    width: 75%;
+    margin: 0;
+}
