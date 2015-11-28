@@ -25,26 +25,26 @@ public class DBHelper {
     private final static String DB_USER = "adminZ4LAQSe";
     private final static String DB_PASS = "cJ7usqLZ3zvD";
     
-    public static Statement connect() {
-        Statement st = null;
-        
+    public static Connection getConnection() {
+        Connection conn = null;
+
         try {
-            st = attemptConnection();
+            conn = attemptConnection();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return st;
+
+        return conn;
     }
-    
-    private static Statement attemptConnection() throws ClassNotFoundException, SQLException {
+
+    private static Connection attemptConnection()
+            throws ClassNotFoundException, SQLException {
         Class.forName(MYSQL_DRIVER);
-        
-        Connection con = DriverManager.getConnection(HOSTNAME + DB_NAME,
+
+        Connection conn = DriverManager.getConnection(HOSTNAME + DB_NAME,
                 DB_USER, DB_PASS);
-        Statement st = con.createStatement();
-        
-        return st;
+
+        return conn;
     }
     
 }
