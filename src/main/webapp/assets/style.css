@@ -194,3 +194,8 @@ p{font-size:1em;line-height: 1.7em; margin-bottom: 1.7em;}
 .delete-box #response{
     margin: 15px 0;
 }
+
+#friends figure {
+    display: inline-block;
+    margin-bottom: 20px;
+}
