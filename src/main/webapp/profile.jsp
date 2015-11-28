@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.dreamteam.snapichat.user.User" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -87,17 +89,17 @@
                             <h4>Profile</h4>
                         </div>
                         <div class="logmod__form">
-                            <form accept-charset="utf-8" action="register" class="simform">
+                            <form accept-charset="utf-8" method="POST" action="updateProfile" class="simform" enctype="multipart/form-data">
                                 <div class="sminputs">
                                     <div class="input full tall">
                                         <div class="img-wrapper">
-                                            <img id="profile-img" class="profile-img" src="images/default_profile.jpg" />
+                                            <img id="profile-img" class="profile-img" src="profileImage" />
                                         </div>
                                         <div class="profile-img-select">
                                             <label class="string optional" for="user-name">Username</label>
                                             <input class="string optional" maxlength="255" id="user-name" name="uname" value="${sessionScope.userName}" type="text" size="50" readonly />
-                                            <label class="string optional" for="user-name">Image</label>
-                                            <input type='file' id="profile-img-btn" />
+                                            <label class="string optional" for="user-photo">Image</label>
+                                            <input type="file" name="user-photo" id="profile-img-btn" />
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -105,43 +107,43 @@
                                 <div class="sminputs">
                                     <div class="input string optional">
                                         <label class="string optional" for="user-fname">First Name</label>
-                                        <input class="string optional" maxlength="255" id="user-fname" name="fname" placeholder="First Name" type="text" size="50" readonly />
+                                        <input class="string optional" maxlength="255" id="user-fname" name="fname" value="${sessionScope.user.getFirstName()}" placeholder="First Name" type="text" size="50" readonly />
                                     </div>
                                     <div class="input string optional">
                                         <label class="string optional" for="user-lname">Last Name</label>
-                                        <input class="string optional" maxlength="255" id="user-lname" name="lname" placeholder="Last Name" type="text" size="50" readonly />
+                                        <input class="string optional" maxlength="255" id="user-lname" name="lname" value="${sessionScope.user.getLastName()}" placeholder="Last Name" type="text" size="50" readonly />
                                     </div>
                                 </div>
                                 <div class="sminputs">
                                     <div class="input full">
                                         <label class="string optional" for="user-email">Email</label>
-                                        <input class="string optional" maxlength="255" id="user-email" name="email" placeholder="Email" type="email" size="50" />
+                                        <input class="string optional" maxlength="255" id="user-email" name="user-email" value="${sessionScope.user.getEmail()}"/>" placeholder="Email" type="email" size="50" />
                                     </div>
                                 </div>
                                 <div class="sminputs">
                                     <div class="input string optional">
                                         <label class="string optional" for="user-country">Country</label>
-                                        <input class="string optional" maxlength="255" id="user-country" name="country" placeholder="Greece" type="text" size="50" />
+                                        <input class="string optional" maxlength="255" id="user-country" name="user-country" value="${sessionScope.user.getCountry()}" placeholder="Greece" type="text" size="50" />
                                     </div>
                                     <div class="input string optional">
                                         <label class="string optional" for="user-city">City</label>
-                                        <input class="string optional" maxlength="255" id="user-city" name="city" placeholder="Thessaloniki" type="text" size="50" />
+                                        <input class="string optional" maxlength="255" id="user-city" name="user-city" value="${sessionScope.user.getCity()}" placeholder="Thessaloniki" type="text" size="50" />
                                     </div>
                                 </div>
                                 <div class="sminputs">
                                     <div class="input full">
                                         <label class="string optional" for="user-phone">Phone Number</label>
-                                        <input class="string optional" maxlength="255" id="user-phone" name="phone" placeholder="Phone Number" type="number" size="50" />
+                                        <input class="string optional" maxlength="255" id="user-phone" name="user-phone" value="${sessionScope.user.getPhone()}" placeholder="Phone Number" type="number" size="50" />
                                     </div>
                                 </div>
                                 <div class="sminputs">
                                     <div class="input string optional">
-                                        <label class="string optional" for="user-pw">Old Password</label>
-                                        <input class="string optional" maxlength="255" id="user-pw" name="pass" placeholder="Password" type="text" size="50" />
+                                        <label class="string optional" for="user-pwd">Old Password</label>
+                                        <input class="string optional" maxlength="255" id="user-pw" name="user-pwd" placeholder="Password" type="text" size="50" />
                                     </div>
                                     <div class="input string optional">
-                                        <label class="string optional" for="user-pw-repeat">New Password</label>
-                                        <input class="string optional" maxlength="255" id="user-pw-repeat" placeholder="Password" type="text" size="50" />
+                                        <label class="string optional" for="new-user-pwd">New Password</label>
+                                        <input class="string optional" maxlength="255" id="new-user-pwd" placeholder="Password" type="text" size="50" />
                                     </div>
                                 </div>
                                 <div class="simform__actions">
