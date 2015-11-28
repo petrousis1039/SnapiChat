@@ -21,6 +21,9 @@ public class User {
     private final String firstName;
     private final String lastName;
     private String email;
+    private String country;
+    private String city;
+    private String phone;
 
     public User(UserBuilder builder) {
         this.id = builder.id;
@@ -28,7 +31,9 @@ public class User {
         this.email = builder.email;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
-
+        this.country = builder.country;
+        this.city = builder.city;
+        this.phone = builder.phone;
     }
 
     public int getId() {
@@ -50,6 +55,18 @@ public class User {
     public String getLastName() {
         return lastName;
     }
+    
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
 
     public void refreshInfo() throws SQLException {
         Connection conn = DBHelper.getConnection();
@@ -62,6 +79,9 @@ public class User {
 
         if (rs.next()) {
             email = rs.getString("user_email");
+            country = rs.getString("user_country");
+            city = rs.getString("user_city");
+            phone = rs.getString("user_phone_num");
         }
 
         conn.close();
@@ -74,6 +94,9 @@ public class User {
         private String email;
         private String firstName;
         private String lastName;
+        private String country;
+        private String city;
+        private String phone;
 
         public UserBuilder(int id, String username) {
             this.id = id;
@@ -92,6 +115,21 @@ public class User {
 
         public UserBuilder lastName(String lastName) {
             this.lastName = lastName;
+            return this;
+        }
+
+        public UserBuilder country(String country) {
+            this.country = country;
+            return this;
+        }
+        
+        public UserBuilder city(String city) {
+            this.city = city;
+            return this;
+        }
+        
+        public UserBuilder phone(String phone) {
+            this.phone = phone;
             return this;
         }
 
