@@ -93,7 +93,9 @@
                                     <span class="logmod__heading-subtitle">Enter your personal details <strong>to create an acount</strong></span>
                                 </div>
                                 <div class="logmod__form">
-                                    <form accept-charset="utf-8" action="register" class="simform">
+                                    <form id="register-frm" accept-charset="utf-8" action="register" class="simform">
+                                        <div id="register-response">
+                                        </div>
                                         <div class="sminputs">
                                             <div class="input string optional">
                                                 <label class="string optional" for="user-fname">First Name*</label>
@@ -112,12 +114,12 @@
                                         </div>
                                         <div class="sminputs">
                                             <div class="input string optional">
-                                                <label class="string optional" for="user-pw">Password*</label>
+                                                <label class="string optional" for="pass">Password*</label>
                                                 <input class="string optional" maxlength="255" id="user-pw" name="pass" placeholder="Password" type="text" size="50" />
                                             </div>
                                             <div class="input string optional">
-                                                <label class="string optional" for="user-pw-repeat">Repeat password*</label>
-                                                <input class="string optional" maxlength="255" id="user-pw-repeat" placeholder="Repeat password" type="text" size="50" />
+                                                <label class="string optional" for="repeat-pass">Repeat password*</label>
+                                                <input class="string optional" maxlength="255" id="user-pw-repeat" name="repeat-pass" placeholder="Repeat password" type="text" size="50" />
                                             </div>
                                         </div>
                                         <div class="sminputs">
@@ -127,9 +129,9 @@
                                             </div>
                                         </div>
                                         <div class="simform__actions">
-                                            <input class="sumbit" name="commit" type="submit" value="Create Account" />
+                                            <input class="sumbit" id="register-btn" name="commit" type="submit" value="Create Account" />
                                             <span class="simform__actions-sidetext">By creating an account you agree to our <a class="special" href="#" target="_blank" role="link">Terms & Privacy</a></span>
-                                        </div> 
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -178,5 +180,31 @@
             <script src="${pageContext.request.contextPath}/assets/respond/respond.js"></script>
 
             <script src="${pageContext.request.contextPath}/assets/index.js"></script>
+            
+            <script>
+            $frm = $('#register-frm');
+            
+            $('#register-btn').click(function() {
+                $.ajax({
+                    url: $frm.attr('action'),
+                    type: $frm.attr('method'),
+                    data: $frm.serialize(),
+                    success: function(data) {
+                        var jobj = jQuery.parseJSON(data);
+                        
+                        if(!jobj.success) {
+                            $('#register-response').empty();
+                            $('#register-response').append('<p class="alert alert-danger">'+jobj.msg+'</p>');
+                        } else {
+                            $('#register-response').empty();
+                            $('#register-response').append('<p class="alert alert-success">'+jobj.msg+'</p>');
+                            window.location.href = 'welcome.jsp';
+                        }
+                    }
+                });
+                
+                return false;
+            });
+            </script>
     </body>
 </html>
