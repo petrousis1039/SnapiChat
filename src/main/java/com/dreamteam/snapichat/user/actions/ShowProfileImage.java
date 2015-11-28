@@ -10,6 +10,7 @@ import com.dreamteam.snapichat.user.User;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import static java.lang.System.out;
 import java.sql.Blob;
@@ -19,12 +20,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -96,16 +99,12 @@ public class ShowProfileImage extends HttpServlet {
     
     private byte[] getDefaultImage() {
         try {
-            FileInputStream fileInputStream;
-            String relativePath = "/images/default_profile.jpg";
-            File file = new File(getServletContext().getRealPath(relativePath));
+            String relativePath = "images/default_profile.jpg";
             
-            byte[] bFile = new byte[(int) file.length()];
+            InputStream is = getServletContext().getResourceAsStream(relativePath);
+            byte[] bFile = IOUtils.toByteArray(is);
             
-            //convert file into array of bytes
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bFile);
-            fileInputStream.close();
+            is.close();
             
             return bFile;
         } catch (IOException ex) {
