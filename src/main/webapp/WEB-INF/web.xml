@@ -13,6 +13,16 @@
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>SessionCheckFilter</filter-name>
+        <filter-class>com.dreamteam.snapichat.filters.SessionCheckFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionCheckFilter</filter-name>
+        <!--url-pattern>/app/*</url-pattern-->
+        <url-pattern>/profile.jsp</url-pattern> <!-- url from where you implement the filtering -->
+        <url-pattern>/friends.jsp</url-pattern>
+    </filter-mapping>
     <session-config>
         <session-timeout>
             30
