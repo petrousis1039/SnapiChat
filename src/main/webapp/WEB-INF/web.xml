@@ -7,7 +7,7 @@
     </welcome-file-list>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>com.dreamteam.snapichat.user.Register</servlet-class>
+        <servlet-class>com.dreamteam.snapichat.user.actions.Register</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>

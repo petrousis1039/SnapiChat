@@ -3,31 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dreamteam.snapichat.user;
+package com.dreamteam.snapichat.user.actions;
 
-import com.dreamteam.snapichat.helpers.DBHelper;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  *
- * @author Lefteris
+ * @author Stratos
  */
-@WebServlet(name = "Shout", urlPatterns = {"/shout"})
-public class Shout extends HttpServlet {
+@WebServlet(name = "SendMail", urlPatterns = {"/sendMail"})
+public class SendMail extends HttpServlet {
 
-    private Statement st;
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,37 +35,54 @@ public class Shout extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
         
-        st = DBHelper.connect();
+        final String username = "dreamteamteicm@gmail.com";
+        final String password = "a147258369";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        String name;
+        String userEmail;
+        String msgText;
         
-        int userID;
         try {
-            userID = (int) session.getAttribute("userID");
+            name = (String) request.getParameter("name");
+            userEmail = (String) request.getParameter("email");
+            msgText = (String) request.getParameter("message");
         } catch(Exception ex) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("contact.jsp");
             return;
         }
-        String message = request.getParameter("message");
-        message = StringEscapeUtils.escapeJavaScript(message);
         
-        boolean result = shout(userID, message);
-        
-        response.sendRedirect("shoutbox.jsp");
-    }
-    
-    private boolean shout(int userID, String message) throws SQLException {
-        String query = String.format(
-                "INSERT INTO shoutbox(user_id, text) values ('%s', '%s')",
-                userID, message);
-        int i = st.executeUpdate(query);
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
 
-        return i > 0;
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(userEmail, name));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse("dreamteamteicm@gmail.com"));
+            message.setSubject("Message from " + name);
+            message.setText(msgText);
+
+            Transport.send(message);
+            response.sendRedirect("contact.jsp");
+        } catch (MessagingException e) {
+            response.sendRedirect("contact.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,11 +97,7 @@ public class Shout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Shout.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -99,11 +111,7 @@ public class Shout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Shout.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
