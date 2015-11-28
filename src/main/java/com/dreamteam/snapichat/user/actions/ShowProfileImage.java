@@ -67,8 +67,12 @@ public class ShowProfileImage extends HttpServlet {
 
             if (rs.next()) {
                 file = rs.getBlob("user_photo");
-                fileData = file.getBytes(1, (int) file.length());
-                if(file.length() == 0) {
+                try {
+                    fileData = file.getBytes(1, (int) file.length());
+                    if (file.length() == 0) {
+                        throw new Exception("No profile image");
+                    }
+                } catch (Exception ex) {
                     fileData = getDefaultImage();
                 }
             } else {
