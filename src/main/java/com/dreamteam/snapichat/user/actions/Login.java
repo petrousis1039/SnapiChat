@@ -7,12 +7,14 @@ package com.dreamteam.snapichat.user.actions;
 
 import com.dreamteam.snapichat.helpers.DBHelper;
 import com.dreamteam.snapichat.helpers.PasswordHash;
+import com.dreamteam.snapichat.user.User;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -30,7 +32,7 @@ import javax.servlet.http.HttpSession;
 public class Login extends HttpServlet {
 
     private HttpSession session;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,40 +47,56 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         session = request.getSession();
-        
+
         String uname = request.getParameter("uname");
         String pwd = request.getParameter("pass");
-        
+
         boolean loggedIn = false;
         try {
             loggedIn = login(uname, pwd);
         } catch (InvalidKeySpecException | NoSuchAlgorithmException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(loggedIn) {
+
+        if (loggedIn) {
             response.sendRedirect("profile.jsp");
         } else {
             response.sendRedirect("login.jsp");
         }
     }
-    
+
     private boolean login(String uname, String pwd)
             throws SQLException, InvalidKeySpecException, NoSuchAlgorithmException {
-        Statement st = DBHelper.connect();
-        String query = String.format("SELECT * FROM user WHERE username='%s'", uname);
-        ResultSet rs = st.executeQuery(query);
+        Connection conn = DBHelper.getConnection();
+
+        String query = "SELECT * FROM user WHERE username=?";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, uname);
+
+        ResultSet rs = st.executeQuery();
 
         if (rs.next()) {
             String pass = rs.getString("passwordhash");
-            
-            if(PasswordHash.validatePassword(pwd, pass)) {
-                session.setAttribute("userID", rs.getInt("id"));
+
+            if (PasswordHash.validatePassword(pwd, pass)) {
+                int id = rs.getInt("id");
+                String email = rs.getString("user_email");
+                String firstName = rs.getString("userfirstname");
+                String lastName = rs.getString("userlastname");
+
+                session.setAttribute("userID", id);
                 session.setAttribute("userName", uname);
+
+                User.UserBuilder b = new User.UserBuilder(id, uname)
+                        .email(email)
+                        .firstName(firstName)
+                        .lastName(lastName);
+                session.setAttribute("user", b.createUser());
                 return true;
             }
         }
-        
+
+        conn.close();
         return false; //invalid password
     }
 
