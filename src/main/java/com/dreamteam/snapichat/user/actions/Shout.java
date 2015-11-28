@@ -7,8 +7,9 @@ package com.dreamteam.snapichat.user.actions;
 
 import com.dreamteam.snapichat.helpers.DBHelper;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -25,8 +26,6 @@ import org.apache.commons.lang.StringEscapeUtils;
  */
 @WebServlet(name = "Shout", urlPatterns = {"/shout"})
 public class Shout extends HttpServlet {
-
-    private Statement st;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,30 +40,36 @@ public class Shout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+
         HttpSession session = request.getSession();
-        
-        st = DBHelper.connect();
-        
+
         int userID;
         try {
             userID = (int) session.getAttribute("userID");
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             response.sendRedirect("login.jsp");
             return;
         }
         String message = request.getParameter("message");
         message = StringEscapeUtils.escapeJavaScript(message);
-        
+
         boolean result = shout(userID, message);
-        
+
         response.sendRedirect("shoutbox.jsp");
     }
     
     private boolean shout(int userID, String message) throws SQLException {
-        String query = String.format(
-                "INSERT INTO shoutbox(user_id, text) values ('%s', '%s')",
-                userID, message);
-        int i = st.executeUpdate(query);
+        Connection conn = DBHelper.getConnection();
+
+        String query = "INSERT INTO shoutbox(user_id, text) values (?, ?)";
+
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, userID);
+        st.setString(2, message);
+
+        int i = st.executeUpdate();
+
+        conn.close();
 
         return i > 0;
     }
