@@ -6,12 +6,12 @@
 package com.dreamteam.snapichat.user.actions;
 
 import com.dreamteam.snapichat.helpers.DBHelper;
+import com.dreamteam.snapichat.user.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -46,24 +46,16 @@ public class DeleteAccount extends HttpServlet {
 
         Connection conn = DBHelper.getConnection();
 
-        int id;
+        User u = (User) session.getAttribute("user");
 
-        try {
-            id = (int) session.getAttribute("userID");
-        } catch (Exception e) {
-            out.println("You are not logged in!");
-            return;
-        }
-
-        String query = "DELETE FROM user WHERE id='?'";
+        String query = "DELETE FROM user WHERE id=?";
         try {
             PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(0, id);
-            int result = st.executeUpdate(query);
-            conn.close();
+            st.setInt(1, u.getId());
+            int result = st.executeUpdate();
+            
             if (result > 0) {
-                session.setAttribute("userID", null);
-                session.setAttribute("userName", null);
+                session.setAttribute("user", null);
                 session.invalidate();
                 out.println("Success, I know nothing, who are you? ;)");
             } else {
@@ -71,6 +63,8 @@ public class DeleteAccount extends HttpServlet {
             }
         } catch (Exception e) {
             out.println("Oups something went wrong! Please contact us!");
+        } finally {
+            conn.close();
         }
     }
 
