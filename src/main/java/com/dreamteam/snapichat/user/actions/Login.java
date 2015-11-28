@@ -83,6 +83,9 @@ public class Login extends HttpServlet {
                 String email = rs.getString("user_email");
                 String firstName = rs.getString("userfirstname");
                 String lastName = rs.getString("userlastname");
+                String country = rs.getString("user_country");
+                String city = rs.getString("user_city");
+                String phone = rs.getString("user_phone_num");
 
                 session.setAttribute("userID", id);
                 session.setAttribute("userName", uname);
@@ -90,7 +93,10 @@ public class Login extends HttpServlet {
                 User.UserBuilder b = new User.UserBuilder(id, uname)
                         .email(email)
                         .firstName(firstName)
-                        .lastName(lastName);
+                        .lastName(lastName)
+                        .country(country)
+                        .city(city)
+                        .phone(phone);
                 session.setAttribute("user", b.createUser());
                 return true;
             }
