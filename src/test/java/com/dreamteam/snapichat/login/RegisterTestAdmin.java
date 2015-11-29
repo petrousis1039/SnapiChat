@@ -43,7 +43,7 @@ public class RegisterTestAdmin {
         driver.findElement(By.id("user-pw-repeat")).clear();
         driver.findElement(By.id("user-pw-repeat")).sendKeys("test_admin");
         driver.findElement(By.id("user-email")).clear();
-        driver.findElement(By.id("user-email")).sendKeys("admin@unit.test");
+        driver.findElement(By.id("user-email")).sendKeys("admin@unit.gr");
         driver.findElement(By.name("commit")).click();
         try {
             assertEquals("Welcome", driver.findElement(By.cssSelector("h4")).getText());

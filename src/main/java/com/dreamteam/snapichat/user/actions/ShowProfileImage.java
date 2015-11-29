@@ -7,8 +7,6 @@ package com.dreamteam.snapichat.user.actions;
 
 import com.dreamteam.snapichat.helpers.DBHelper;
 import com.dreamteam.snapichat.user.User;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -20,7 +18,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -99,7 +96,7 @@ public class ShowProfileImage extends HttpServlet {
     
     private byte[] getDefaultImage() {
         try {
-            String relativePath = "images/default_profile.jpg";
+            String relativePath = "/images/default_profile.jpg";
             
             InputStream is = getServletContext().getResourceAsStream(relativePath);
             byte[] bFile = IOUtils.toByteArray(is);

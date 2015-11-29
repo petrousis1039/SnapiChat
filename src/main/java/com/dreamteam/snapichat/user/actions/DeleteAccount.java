@@ -48,11 +48,35 @@ public class DeleteAccount extends HttpServlet {
 
         User u = (User) session.getAttribute("user");
 
-        String query = "DELETE FROM user WHERE id=?";
+        String query1 = "DELETE FROM shoutbox WHERE user_id=?";
+        
+        String query2 = "DELETE FROM user_friendlist WHERE userid1=? OR userid2=?";
+        
+        String query3 = "DELETE FROM user WHERE id=?";
+        
         try {
-            PreparedStatement st = conn.prepareStatement(query);
+            PreparedStatement st = conn.prepareStatement(query1);
             st.setInt(1, u.getId());
             int result = st.executeUpdate();
+            
+            if(result < 0) {
+                out.println("Couldn't remove messages from shoutbox");
+                return;
+            }
+            
+            st = conn.prepareStatement(query2);
+            st.setInt(1, u.getId());
+            st.setInt(2, u.getId());
+            result = st.executeUpdate();
+            
+            if(result < 0) {
+                out.println("Couldn't delete friends");
+                return;
+            }
+            
+            st = conn.prepareStatement(query3);
+            st.setInt(1, u.getId());
+            result = st.executeUpdate();
             
             if (result > 0) {
                 session.setAttribute("user", null);

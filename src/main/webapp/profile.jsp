@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="profile-img-select">
                                             <label class="string optional" for="user-name">Username</label>
-                                            <input class="string optional" maxlength="255" id="user-name" name="uname" value="${sessionScope.userName}" type="text" size="50" readonly />
+                                            <input class="string optional" maxlength="255" id="user-name" name="uname" value="${sessionScope.user.getUsername()}" type="text" size="50" readonly />
                                             <label class="string optional" for="user-photo">Image</label>
                                             <input type="file" name="user-photo" id="profile-img-btn" />
                                         </div>

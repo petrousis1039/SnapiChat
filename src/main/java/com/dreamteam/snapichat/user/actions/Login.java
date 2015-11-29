@@ -87,9 +87,6 @@ public class Login extends HttpServlet {
                 String city = rs.getString("user_city");
                 String phone = rs.getString("user_phone_num");
 
-                session.setAttribute("userID", id);
-                session.setAttribute("userName", uname);
-
                 User.UserBuilder b = new User.UserBuilder(id, uname)
                         .email(email)
                         .firstName(firstName)
