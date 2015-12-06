@@ -54,7 +54,7 @@ public class MakeFriend extends HttpServlet {
         
         ResultSet rs = st.executeQuery();
         if(!rs.next()) {
-            response.sendRedirect("friends.jsp");
+            response.sendRedirect("friends");
             return; //not user with that name
         }
         
@@ -63,7 +63,7 @@ public class MakeFriend extends HttpServlet {
         int friendId = rs.getInt("id");
         
         if(currentUserId == friendId) { //can't be friend with himself
-            response.sendRedirect("friends.jsp");
+            response.sendRedirect("friends");
             return;
         }
         
@@ -75,7 +75,7 @@ public class MakeFriend extends HttpServlet {
 
         rs = st.executeQuery();
         if (rs.next()) {
-            response.sendRedirect("friends.jsp");
+            response.sendRedirect("friends");
             return; //friendship already exist
         }
         
@@ -87,7 +87,7 @@ public class MakeFriend extends HttpServlet {
         int i = st.executeUpdate();
         
         conn.close();
-        response.sendRedirect("friends.jsp");
+        response.sendRedirect("friends");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

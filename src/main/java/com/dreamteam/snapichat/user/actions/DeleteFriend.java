@@ -56,7 +56,7 @@ public class DeleteFriend extends HttpServlet {
         
         int i = st.executeUpdate();
         
-        response.sendRedirect("friends.jsp");
+        response.sendRedirect("friends");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
