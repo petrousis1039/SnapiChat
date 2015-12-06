@@ -199,3 +199,42 @@ p{font-size:1em;line-height: 1.7em; margin-bottom: 1.7em;}
     display: inline-block;
     margin-bottom: 20px;
 }
+
+#chat-content {
+    height: 260px;
+    overflow: auto;
+    border: 1px solid #DDD;
+    margin-bottom: 20px;
+    background-color: #FFF;
+    padding: 10px;
+}
+
+#chat-content .message {
+    padding: 2px;
+}
+
+#chat-content .user {
+    display: inline-block;
+    padding: 0 5px 0 0;
+    margin: 0;
+}
+
+#chat-content .message.other {
+    text-align: right;
+}
+
+#chat-content .text {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.msg-input {
+    width: 100px;
+}
+
+.one-edge-shadow {
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}
