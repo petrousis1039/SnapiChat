@@ -19,9 +19,12 @@
     </filter>
     <filter-mapping>
         <filter-name>SessionCheckFilter</filter-name>
-        <!--url-pattern>/app/*</url-pattern-->
-        <url-pattern>/profile.jsp</url-pattern> <!-- url from where you implement the filtering -->
+        <url-pattern>/edit_profile.jsp</url-pattern>
+        <url-pattern>/user_profile.jsp</url-pattern>
+        <url-pattern>/profile</url-pattern>
         <url-pattern>/friends.jsp</url-pattern>
+        <url-pattern>/friends</url-pattern>
+        <url-pattern>/findFriends</url-pattern>
     </filter-mapping>
     <session-config>
         <session-timeout>
