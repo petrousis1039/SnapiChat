@@ -88,17 +88,11 @@
                 <h2 class="text-center  wowload fadeInUp">Shout Out Loud</h2>
                 <div class="row wowload fadeInLeftBig">      
                     <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-                        <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-                                           url="jdbc:mysql://127.7.232.130:3306/snapichat"
-                                           user="adminZ4LAQSe" password="cJ7usqLZ3zvD"/>
-                        <sql:query dataSource="${snapshot}" var="result">
-                            SELECT * from shoutbox, user WHERE shoutbox.user_id = user.id;
-                        </sql:query>
                         <div id="shoutbox">
-                            <c:forEach var="row" items="${result.rows}">
+                            <c:forEach items="${messages}" var="shout">
                                 <div class="message">
-                                    <p class="user">${row.username}</p>
-                                    <p class="text">${row.text}</p>
+                                    <p class="user">${shout.username}</p>
+                                    <p class="text">${shout.text}</p>
                                 </div>
                             </c:forEach>
                         </div>
