@@ -69,11 +69,11 @@
                             <ul class="nav navbar-nav navbar-right scroll">
                                 <li ><a href="index.jsp">Home</a></li>
                                 <li ><a href="login.jsp">Login</a></li>
-                                <li ><a href="profile.jsp">Profile</a></li>
-                                <li class="active"><a href="friends.jsp">Friends</a></li>
+                                <li ><a href="edit_profile.jsp">Profile</a></li>
+                                <li class="active"><a href="friends">Friends</a></li>
                                 <li ><a href="story.jsp">Story</a></li>
                                 <li ><a href="#">Snapis</a></li>
-                                <li ><a href="shoutbox.jsp">ShoutBox</a></li>
+                                <li ><a href="shoutbox">ShoutBox</a></li>
                                 <li ><a href="about.jsp">About</a></li>
                                 <li ><a href="contact.jsp">Contact</a></li>
                             </ul>
@@ -83,33 +83,27 @@
                 </div>
             </div>
         </div>
-        
-        <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-                           url="jdbc:mysql://127.7.232.130:3306/snapichat"
-                           user="adminZ4LAQSe" password="cJ7usqLZ3zvD"/>
-         <sql:query dataSource="${snapshot}" var="result">
-             SELECT id,username FROM user,user_friendlist WHERE user.id = user_friendlist.userid2 AND userid1=${sessionScope.user.getId()};
-         </sql:query>
+
         <!-- team -->
         <div id="friends" class="container spacer ">
             <h3 class="text-center  wowload fadeInUp">Friends</h3>
-            <p class="text-center  wowload fadeInLeft">You have ${result.rowCount} friends</p>
+            <p class="text-center wowload fadeInLeft">You have ${friends.size()} friends</p>
             <div class="row grid team  wowload fadeInUpBig">
                 <c:choose>
-                    <c:when test="${result.rowCount != 0 }">
-                        <c:forEach var="row" items="${result.rows}">
+                    <c:when test="${friends.size() > 0}">
+                        <c:forEach items="${friends}" var="friend">
                             <div class=" col-sm-3 col-xs-6">
                                 <figure class="effect-chico">
-                                    <img src="profileImage?uid=${row.id}" class="img-responsive" />
+                                    <img src="profileImage?uid=${friend.id}" class="img-responsive" />
                                     <figcaption>
                                         <p>
-                                            <b>${row.username}</b><br><br>
+                                            <b><a href="profile?id=${friend.id}">${friend.username}</a></b><br><br>
                                             <a href="#"><i class="fa fa-dribbble"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a>
                                         </p>
                                     </figcaption>
                                 </figure>
                                 <form action="deleteFriend" method="POST">
-                                    <input type="hidden" name="uid" value="${row.id}">
+                                    <input type="hidden" name="uid" value="${friend.id}">
                                     <input class="btn btn-primary" type="submit" value="Delete">
                                 </form>
                             </div>
@@ -122,11 +116,17 @@
             </div>
         </div>
         <!-- team -->
-        
+
         <div class="container contactform center">
             <h2 class="text-center  wowload fadeInUp">Make Friends</h2>
+
             <div class="row wowload fadeInLeftBig">      
                 <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
+                    <form action="findFriends" method="POST">
+                        <h4 class="find-friends-label">Check for other users near you:</h4>
+                        <button name="find-friends" class="btn btn-warning">Find Friends</button>
+                    </form>
+                    <hr />
                     <form action="makeFriend" id="make-friend-frm" method="POST">
                         <input class="input-medium" placeholder="username" type="text" name="friend-name" />
                         <input class="btn btn-primary" type="submit" id="add-friend-btn" value="Add Friend" />
