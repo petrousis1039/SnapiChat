@@ -93,14 +93,14 @@ public class UpdateProfile extends HttpServlet {
                 
                 conn.close();
 
-                RequestDispatcher rs = request.getRequestDispatcher("profile.jsp");
+                RequestDispatcher rs = request.getRequestDispatcher("edit_profile.jsp");
                 rs.include(request, response);
             } else {
                 out.println("Couldn't upload your file!!!");
 
                 conn.close();
 
-                RequestDispatcher rs = request.getRequestDispatcher("profile.jsp");
+                RequestDispatcher rs = request.getRequestDispatcher("edit_profile.jsp");
                 rs.include(request, response);
             }
 

@@ -64,10 +64,10 @@
                             <ul class="nav navbar-nav navbar-right scroll">
                                 <li ><a href="index.jsp">Home</a></li>
                                 <li ><a href="login.jsp">Login</a></li>
-                                <li ><a href="profile.jsp">Profile</a></li>
+                                <li ><a href="edit_profile.jsp">Profile</a></li>
                                 <li ><a href="friends.jsp">Friends</a></li>
                                 <li ><a href="story.jsp">Story</a></li>
-                                <li ><a href="#">Snapis</a></li>
+                                <li ><a href="chat.jsp">Snapis</a></li>
                                 <li ><a href="shoutbox.jsp">ShoutBox</a></li>
                                 <li ><a href="about.jsp">About</a></li>
                                 <li ><a href="contact.jsp">Contact</a></li>

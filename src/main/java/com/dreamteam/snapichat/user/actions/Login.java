@@ -59,7 +59,7 @@ public class Login extends HttpServlet {
         }
 
         if (loggedIn) {
-            response.sendRedirect("profile.jsp");
+            response.sendRedirect("edit_profile.jsp");
         } else {
             response.sendRedirect("login.jsp");
         }
