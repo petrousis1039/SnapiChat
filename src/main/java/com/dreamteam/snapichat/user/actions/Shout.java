@@ -6,6 +6,7 @@
 package com.dreamteam.snapichat.user.actions;
 
 import com.dreamteam.snapichat.helpers.DBHelper;
+import com.dreamteam.snapichat.user.User;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,7 +46,8 @@ public class Shout extends HttpServlet {
 
         int userID;
         try {
-            userID = (int) session.getAttribute("userID");
+            User u = (User) session.getAttribute("user");
+            userID = u.getId();
         } catch (Exception ex) {
             response.sendRedirect("login.jsp");
             return;
@@ -55,7 +57,7 @@ public class Shout extends HttpServlet {
 
         boolean result = shout(userID, message);
 
-        response.sendRedirect("shoutbox.jsp");
+        response.sendRedirect("shoutbox");
     }
     
     private boolean shout(int userID, String message) throws SQLException {
