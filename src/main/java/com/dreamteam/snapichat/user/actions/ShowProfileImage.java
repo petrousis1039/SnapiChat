@@ -6,7 +6,12 @@
 package com.dreamteam.snapichat.user.actions;
 
 import com.dreamteam.snapichat.helpers.DBHelper;
+import com.dreamteam.snapichat.image.ImageTools;
 import com.dreamteam.snapichat.user.User;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -18,6 +23,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -80,12 +86,28 @@ public class ShowProfileImage extends HttpServlet {
                 return;
             }
 
+            byte[] imgByteArray;
+            try {
+                Image img = Toolkit.getDefaultToolkit().createImage(fileData);
+                ImageTools imgTools = new ImageTools();
+                Image thumb = imgTools.createThumbnail(img);
+                BufferedImage bImg = ImageTools.toBufferedImage(thumb);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(bImg, "jpg", baos);
+                baos.flush();
+                imgByteArray = baos.toByteArray();
+                baos.close();
+            } catch(Exception ex) {
+                imgByteArray = fileData;
+            }
+            
             response.setContentType("image");
             response.setHeader("Content-Disposition", "inline");
-            response.setContentLength(fileData.length);
+            response.setContentLength(imgByteArray.length);
 
             OutputStream output = response.getOutputStream();
-            output.write(fileData);
+            output.write(imgByteArray);
 
             output.flush();
 
