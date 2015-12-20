@@ -65,9 +65,9 @@
                                 <li ><a href="login.jsp">Login</a></li>
                                 <li ><a href="edit_profile.jsp">Profile</a></li>
                                 <li ><a href="friends">Friends</a></li>
-                                <li ><a href="story.jsp">Story</a></li>
+                                <li ><a href="story">Story</a></li>
                                 <li ><a href="chat.jsp">Snapis</a></li>
-                                <li ><a href="shoutbox.jsp">ShoutBox</a></li>
+                                <li ><a href="shoutbox">ShoutBox</a></li>
                                 <li ><a href="about.jsp">About</a></li>
                                 <li class="active"><a href="contact.jsp">Contact</a></li>
                             </ul>

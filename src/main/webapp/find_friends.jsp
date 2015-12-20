@@ -71,7 +71,7 @@
                                 <li ><a href="login.jsp">Login</a></li>
                                 <li ><a href="edit_profile.jsp">Profile</a></li>
                                 <li class="active"><a href="friends">Friends</a></li>
-                                <li ><a href="story.jsp">Story</a></li>
+                                <li ><a href="story">Story</a></li>
                                 <li ><a href="chat.jsp">Snapis</a></li>
                                 <li ><a href="shoutbox">ShoutBox</a></li>
                                 <li ><a href="about.jsp">About</a></li>
