@@ -25,6 +25,9 @@
         <url-pattern>/friends.jsp</url-pattern>
         <url-pattern>/friends</url-pattern>
         <url-pattern>/findFriends</url-pattern>
+        <url-pattern>/story</url-pattern>
+        <url-pattern>/story.jsp</url-pattern>
+        <url-pattern>/chat.jsp</url-pattern>
     </filter-mapping>
     <session-config>
         <session-timeout>
