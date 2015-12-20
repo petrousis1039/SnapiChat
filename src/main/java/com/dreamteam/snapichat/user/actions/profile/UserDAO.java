@@ -19,6 +19,10 @@ import java.sql.SQLException;
 public class UserDAO {
     
     public User getUser(int id) throws SQLException {
+        return getUser(Integer.toString(id));
+    }
+    
+    public User getUser(String id) throws SQLException {
         User user = null;
         
         Connection connection = DBHelper.getConnection();
@@ -26,7 +30,7 @@ public class UserDAO {
         String query = "SELECT * FROM user"
                 + " WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, id);
+        statement.setString(1, id);
 
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
@@ -42,6 +46,7 @@ public class UserDAO {
             user = builder.createUser();
         }
 
+        connection.close();
         return user;
     }
     
