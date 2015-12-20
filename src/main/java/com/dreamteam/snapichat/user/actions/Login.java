@@ -8,6 +8,7 @@ package com.dreamteam.snapichat.user.actions;
 import com.dreamteam.snapichat.helpers.DBHelper;
 import com.dreamteam.snapichat.helpers.PasswordHash;
 import com.dreamteam.snapichat.user.User;
+import com.dreamteam.snapichat.user.actions.profile.UserDAO;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -80,21 +81,10 @@ public class Login extends HttpServlet {
 
             if (PasswordHash.validatePassword(pwd, pass)) {
                 int id = rs.getInt("id");
-                String email = rs.getString("user_email");
-                String firstName = rs.getString("userfirstname");
-                String lastName = rs.getString("userlastname");
-                String country = rs.getString("user_country");
-                String city = rs.getString("user_city");
-                String phone = rs.getString("user_phone_num");
-
-                User.UserBuilder b = new User.UserBuilder(id, uname)
-                        .email(email)
-                        .firstName(firstName)
-                        .lastName(lastName)
-                        .country(country)
-                        .city(city)
-                        .phone(phone);
-                session.setAttribute("user", b.createUser());
+                UserDAO userDAO = new UserDAO();
+                User user = userDAO.getUser(id);
+                
+                session.setAttribute("user", user);
                 return true;
             }
         }
