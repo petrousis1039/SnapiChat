@@ -39,6 +39,10 @@ public class User {
     public int getId() {
         return id;
     }
+    
+    public String getIdAsString() {
+        return Integer.toString(id);
+    }
 
     public String getEmail() {
         return email;
