@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS `user_story_pictures`;
 CREATE TABLE `user_story_pictures` (
   `idpictures` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `story_picture` varchar(45) DEFAULT NULL,
+  `story_picture` longtext DEFAULT NULL,
   PRIMARY KEY (`idpictures`),
   KEY `id_user_idx` (`id_user`),
   CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
