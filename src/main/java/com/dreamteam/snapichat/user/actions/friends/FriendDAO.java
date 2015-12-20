@@ -36,12 +36,15 @@ public class FriendDAO {
     
     public List<Friend> list(int id, int action) throws SQLException {
         Action a;
-        if(action == 0) {
-            a = Action.FIND_NEW;
-        } else if(action == 1) {
-            a = Action.LIST_FRIENDS;
-        } else {
-            return Collections.EMPTY_LIST;
+        switch (action) {
+            case 0:
+                a = Action.FIND_NEW;
+                break;
+            case 1:
+                a = Action.LIST_FRIENDS;
+                break;
+            default:
+                return Collections.EMPTY_LIST;
         }
         
         return list(id, a);
@@ -58,7 +61,7 @@ public class FriendDAO {
     }
     
     public List<Friend> listNewPeople(int id) throws SQLException {
-        List<Friend> friends = new ArrayList<Friend>();
+        List<Friend> friends = new ArrayList<>();
 
         Connection connection = DBHelper.getConnection();
         
@@ -81,7 +84,7 @@ public class FriendDAO {
     }
     
     public List<Friend> listUserFriends(int id) throws SQLException {
-        List<Friend> friends = new ArrayList<Friend>();
+        List<Friend> friends = new ArrayList<>();
 
         Connection connection = DBHelper.getConnection();
 
