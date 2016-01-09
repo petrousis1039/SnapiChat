@@ -254,6 +254,8 @@ public class OneToOneChat {
                 JSONObject jsonUser = new JSONObject();
                 jsonUser.put("uid", userID);
                 jsonUser.put("username", u.getUsername());
+                jsonUser.put("longitude", u.getLongitude());
+                jsonUser.put("latitude", u.getLatitude());
 
                 users.put(jsonUser);
             }
