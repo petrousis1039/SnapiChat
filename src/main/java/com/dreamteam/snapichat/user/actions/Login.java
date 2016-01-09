@@ -85,6 +85,7 @@ public class Login extends HttpServlet {
                 User user = userDAO.getUser(id);
                 
                 session.setAttribute("user", user);
+                conn.close();
                 return true;
             }
         }
