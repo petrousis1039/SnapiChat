@@ -27,8 +27,7 @@ public class UserDAO {
         
         Connection connection = DBHelper.getConnection();
 
-        String query = "SELECT * FROM user"
-                + " WHERE id = ?";
+        String query = "SELECT * FROM user LEFT JOIN user_location ON user.id = user_location.uid WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, id);
 
@@ -42,6 +41,8 @@ public class UserDAO {
             builder.country(resultSet.getString("user_country"));
             builder.city(resultSet.getString("user_city"));
             builder.phone(resultSet.getString("user_phone_num"));
+            builder.longitude(resultSet.getString("longitude"));
+            builder.latitude(resultSet.getString("latitude"));
             
             user = builder.createUser();
         }
