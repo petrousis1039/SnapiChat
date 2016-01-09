@@ -24,6 +24,8 @@ public class User {
     private String country;
     private String city;
     private String phone;
+    private final String longitude;
+    private final String latitude;
 
     public User(UserBuilder builder) {
         this.id = builder.id;
@@ -34,6 +36,8 @@ public class User {
         this.country = builder.country;
         this.city = builder.city;
         this.phone = builder.phone;
+        this.longitude = builder.longitude;
+        this.latitude = builder.latitude;
     }
 
     public int getId() {
@@ -71,6 +75,14 @@ public class User {
     public String getPhone() {
         return phone;
     }
+    
+    public String getLongitude() {
+        return longitude;
+    }
+    
+    public String getLatitude() {
+        return latitude;
+    }
 
     public void refreshInfo() throws SQLException {
         Connection conn = DBHelper.getConnection();
@@ -101,10 +113,14 @@ public class User {
         private String country;
         private String city;
         private String phone;
+        private String longitude;
+        private String latitude;
 
         public UserBuilder(int id, String username) {
             this.id = id;
             this.username = username;
+            longitude = "0";
+            latitude = "0";
         }
 
         public UserBuilder email(String email) {
@@ -134,6 +150,26 @@ public class User {
         
         public UserBuilder phone(String phone) {
             this.phone = phone;
+            return this;
+        }
+        
+        public UserBuilder longitude(String longitude) {
+            if(longitude == null) {
+                this.longitude = "0";
+            } else {
+                this.longitude = longitude;
+            }
+            
+            return this;
+        }
+        
+        public UserBuilder latitude(String latitude) {
+            if(latitude == null) {
+                this.latitude = "0";
+            } else {
+                this.latitude = latitude;
+            }
+            
             return this;
         }
 
