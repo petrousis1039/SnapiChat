@@ -9,7 +9,9 @@ import com.dreamteam.snapichat.user.User;
 import com.dreamteam.snapichat.user.actions.profile.UserDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -34,7 +36,7 @@ import org.json.JSONObject;
 public class OneToOneChat {
 
     //store the online users with their session id and user id
-    private static final HashMap<String, String> USERS_MAP = new HashMap<>();
+    private static final HashMap<String, List<String>> USERS_MAP = new HashMap<>();
     //store the session parameters of all connected clients  
     private static final Set<OneToOneChat> CONNECTIONS = new CopyOnWriteArraySet<>();
     
@@ -64,7 +66,7 @@ public class OneToOneChat {
         }
         
         //add username and session id in hashmap
-        addUserInMap(session.getId(), userID);
+        addUserInMap(userID, session.getId());
         
         //broadcast new user joined notification to all connected clients
         newJoinUpdateAllJSON(uid);
@@ -110,15 +112,19 @@ public class OneToOneChat {
 
     private void sendMessageToUser(String to, String from, String actualMessage, String img) {
         //get sessionid of recipient and sender
-        String toSessionId = getSessionIdOfUser(to);
-        String fromSessionId = getSessionIdOfUser(from);
+        List<String> toSessionIDs = getSessionIDsByUser(to);
+        List<String> fromSessionIDs = getSessionIDsByUser(from);
         
         //prepare proper format of msg
         String messageToSend = prepareMessageJSON(to, from, user.getUsername(), actualMessage, img);
         
         //send the message to recipient and inform sender
-        broadcast(messageToSend, toSessionId);
-        broadcast(messageToSend, fromSessionId);
+        for(int i=0; i<fromSessionIDs.size(); i++) {
+            broadcast(messageToSend, fromSessionIDs.get(i));
+        }
+        for(int j=0; j<toSessionIDs.size(); j++) {
+            broadcast(messageToSend, toSessionIDs.get(j));
+        }
     }
 
     private void broadcast(String messageToSend, String toSessionId) {
@@ -203,13 +209,27 @@ public class OneToOneChat {
     }
     
     //add session id and user id to hashmap
-    private void addUserInMap(String id, String userID) {
-        USERS_MAP.put(id, userID);
+    private void addUserInMap(String uid, String sid) {
+        if(USERS_MAP.containsKey(uid)) {
+            USERS_MAP.get(uid).add(sid);
+        } else {
+            List<String> sessionIDs = new ArrayList<>();
+            sessionIDs.add(sid);
+            USERS_MAP.put(uid, sessionIDs);
+        }
     }
 
     //remove user from hashmap by session id
-    private void removeUserFromMap(String id) {
-        USERS_MAP.remove(id);
+    private void removeUserFromMap(String sid) {
+        for(String uid : USERS_MAP.keySet()) {
+            List<String> sessions = USERS_MAP.get(uid);
+            if(sessions.contains(sid)) {
+                sessions.remove(sid);
+                if(sessions.isEmpty()) {
+                    USERS_MAP.remove(uid);
+                }
+            }
+        }
     }
 
     //get list of online users from hashmap
@@ -219,8 +239,8 @@ public class OneToOneChat {
             obj.put("action", "LIST");
             JSONArray users = new JSONArray();
             
-            for(Entry<String, String> m : USERS_MAP.entrySet()) {
-                String userID = m.getValue();
+            for(Entry<String, List<String>> m : USERS_MAP.entrySet()) {
+                String userID = m.getKey();
                 User u;
                 
                 UserDAO userDAO = new UserDAO();
@@ -248,14 +268,11 @@ public class OneToOneChat {
         return "";
     }
     
-    private String getSessionIdOfUser(String to) {
-        if (USERS_MAP.containsValue(to)) {
-            for (String key : USERS_MAP.keySet()) {
-                if (USERS_MAP.get(key).equals(to)) {
-                    return key;
-                }
-            }
+    private List<String> getSessionIDsByUser(String uid) {
+        if(USERS_MAP.containsKey(uid)) {
+            return USERS_MAP.get(uid);
         }
+        
         return null;
     }
 
