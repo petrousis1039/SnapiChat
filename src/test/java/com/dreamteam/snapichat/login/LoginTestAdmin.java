@@ -21,7 +21,7 @@ public class LoginTestAdmin {
     public void setUp() throws Exception {
         System.out.println(" > Login Test Admin");
         driver = new FirefoxDriver();
-        baseUrl = "http://localhost:8084";
+        baseUrl = "http://localhost:9090";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 

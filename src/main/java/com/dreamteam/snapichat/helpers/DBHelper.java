@@ -19,10 +19,10 @@ public class DBHelper {
     
     //Only for openshift database
     private final static String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
-    private final static String HOSTNAME = "jdbc:mysql://127.7.232.130:3306/";
+    private final static String HOSTNAME = "jdbc:mysql://localhost:3306/";
     private final static String DB_NAME = "snapichat";
-    private final static String DB_USER = "adminZ4LAQSe";
-    private final static String DB_PASS = "cJ7usqLZ3zvD";
+    private final static String DB_USER = "root";
+    private final static String DB_PASS = "root";
     
     public static Connection getConnection() {
         Connection conn = null;
