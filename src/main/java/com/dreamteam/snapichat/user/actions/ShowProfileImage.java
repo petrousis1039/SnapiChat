@@ -57,12 +57,13 @@ public class ShowProfileImage extends HttpServlet {
             Connection conn = DBHelper.getConnection();
 
             String uid = request.getParameter("uid");
+            int userId;
             
-            HttpSession session = request.getSession();
-            User u = (User) session.getAttribute("user");
-            int userId = u.getId();
-            
-            if(uid != null) {
+            if(uid == null) {
+                HttpSession session = request.getSession();
+                User u = (User) session.getAttribute("user");
+                userId = u.getId();
+            } else {
                 userId = Integer.parseInt(uid);
             }
             
