@@ -9,6 +9,8 @@ import com.dreamteam.snapichat.helpers.DBHelper;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -37,22 +39,41 @@ public class UpdateLocation extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        JSONObject jsonResponse = new JSONObject();
         
+        String uid = request.getParameter("uid");
+        String longitude = request.getParameter("longitude");
+        String latitude = request.getParameter("latitude");
+        
+        JSONObject jsonResponse = createJSONResponse(uid, longitude, latitude);
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(jsonResponse.toString());
+    }
+    
+    protected JSONObject createJSONResponse(String uid, String longitude, String latitude) {
+        JSONObject jsonResponse = new JSONObject();
+
         try {
-            String uid = request.getParameter("uid");
-            String longitude = request.getParameter("longitude");
-            String latitude = request.getParameter("latitude");
-            
-            if(uid == null || longitude == null || latitude == null) {
+            if (uid == null || longitude == null || latitude == null) {
                 jsonResponse.put("success", "0");
                 jsonResponse.put("cause", "insufficient parameters");
-                return;
+                return jsonResponse;
+            }
+
+            Connection conn = DBHelper.getConnection();
+            
+            String query = "SELECT * FROM user WHERE id = ?";
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1, uid);
+            ResultSet rs = st.executeQuery();
+            if(!rs.next()) {
+                jsonResponse.put("success", "0");
+                jsonResponse.put("cause", "no such user (" + uid + ")");
+                return jsonResponse;
             }
             
-            Connection conn = DBHelper.getConnection();
-            PreparedStatement st = conn.prepareStatement("INSERT INTO user_location "
+            st = conn.prepareStatement("INSERT INTO user_location "
                     + "(uid, longitude, latitude) VALUES (?, ?, ?) "
                     + "ON DUPLICATE KEY UPDATE "
                     + "longitude = VALUES(longitude),"
@@ -60,13 +81,13 @@ public class UpdateLocation extends HttpServlet {
             st.setString(1, uid);
             st.setString(2, longitude);
             st.setString(3, latitude);
-            
+
             st.executeUpdate();
-            
+
             jsonResponse.put("success", "1");
-            
+
             conn.close();
-        } catch (Exception ex) {
+        } catch (JSONException | SQLException ex) {
             try {
                 jsonResponse.put("success", "0");
                 jsonResponse.put("cause", ex.toString());
@@ -76,9 +97,7 @@ public class UpdateLocation extends HttpServlet {
             }
         }
         
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(jsonResponse.toString());
+        return jsonResponse;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
