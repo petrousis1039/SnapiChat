@@ -83,7 +83,7 @@
             <figure class="effect-oscar  wowload fadeIn">
                 <img src="${pageContext.request.contextPath}/images/portfolio/1.jpg" alt="img01"/>
                 <figcaption>
-                    <h2>Nature</h2>
+                    <h2 style="font-size: 40px">Nature</h2>
                     <p>Discover the beauty of nature<br>
                         <a href="${pageContext.request.contextPath}/images/portfolio/1.jpg" title="1" data-gallery>View more</a></p>            
                 </figcaption>
@@ -91,16 +91,16 @@
             <figure class="effect-oscar  wowload fadeInUp">
                 <img src="${pageContext.request.contextPath}/images/portfolio/2.jpg" alt="img01"/>
                 <figcaption>
-                    <h2>Events</h2>
-                    <p>Invite everyone with the most awesome way<br>
+                    <h2 style="font-size: 40px">Agriculture</h2>
+                    <p>the science or practice of farming<br>
                         <a href="${pageContext.request.contextPath}/images/portfolio/2.jpg" title="1" data-gallery>View more</a></p>            
                 </figcaption>
             </figure>
             <figure class="effect-oscar  wowload fadeInUp">
                 <img src="${pageContext.request.contextPath}/images/portfolio/3.jpg" alt="img01"/>
                 <figcaption>
-                    <h2>Music</h2>
-                    <p>Share every moment with the loved ones<br>
+                    <h2 style="font-size: 40px">Performance</h2>
+                    <p>Snapichat, improving the performance of the agricultural sector<br>
                         <a href="${pageContext.request.contextPath}/images/portfolio/3.jpg" title="1" data-gallery>View more</a></p>            
                 </figcaption>
             </figure>

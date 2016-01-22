@@ -81,11 +81,18 @@
         <div id="partners" class="container spacer ">
             <h2 class="text-center  wowload fadeInUp">Some of our happy clients</h2>
             <div class="clearfix">
-                <div class="col-sm-6 partners  wowload fadeInLeft">
-                    <img src="images/partners/1.jpg" alt="partners">
-                    <img src="images/partners/2.jpg" alt="partners">
-                    <img src="images/partners/3.jpg" alt="partners">
-                    <img src="images/partners/4.jpg" alt="partners">
+                <div class="col-sm-6 partners wowload fadeInLeft">
+                    <h2 class="text-center  wowload fadeInUp">Our Team</h2>
+                    <ul>
+                        <li>Αλέξανδρος Μάρκοβιτς</li>
+                        <li>Πασχάλης Ευσταθιάδης</li>
+                        <li>Πέτρος Πετρούσης</li>
+                        <li>Πέγιος Ιωάννης</li>
+                        <li>Πασαλίδου Δέσποινα</li>
+                        <li>Σκάρρα Λευτέρης</li>
+                        <li>Αβραμίδης Στράτος</li>
+                        <li>Γκουτζελούδη Αναστασία</li>
+                    </ul>
                 </div>
 
                 <div class="col-sm-6">
